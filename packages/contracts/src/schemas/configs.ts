@@ -333,6 +333,9 @@ export type FontSize = z.infer<typeof FontSizeSchema>;
 export const MaxLineWidthSchema = z.number().min(20).max(1000).or(z.literal(0));
 export type MaxLineWidth = z.infer<typeof MaxLineWidthSchema>;
 
+export const NeomorphSchema = z.enum(["off", "on"]);
+export type Neomorph = z.infer<typeof NeomorphSchema>;
+
 export const CustomBackgroundSchema = z
   .string()
   .url("Needs to be an URI.")
@@ -434,6 +437,7 @@ export const ConfigSchema = z
     showAverage: ShowAverageSchema,
     maxLineWidth: MaxLineWidthSchema,
     customPolyglot: CustomPolyglotSchema,
+    neomorph: NeomorphSchema,
   } satisfies Record<string, ZodSchema>)
   .strict();
 
@@ -458,7 +462,6 @@ export const ConfigGroupNameSchema = z.enum([
 ]);
 
 export type ConfigGroupName = z.infer<typeof ConfigGroupNameSchema>;
-
 export const ConfigGroupsLiteral = {
   theme: "theme",
   themeLight: "theme",
@@ -548,6 +551,7 @@ export const ConfigGroupsLiteral = {
   showAverage: "hideElements",
   maxLineWidth: "appearance",
   customPolyglot: "behavior",
+  neomorph: "appearance",
 } as const satisfies Record<ConfigKey, ConfigGroupName>;
 
 export type ConfigGroups = typeof ConfigGroupsLiteral;
